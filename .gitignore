@@ -1,0 +1,13 @@
+build
+bin
+classes
+**/*.
+**/*.log
+**/*.orig
+!.gitignore
+*.iml
+*.ipr
+*.iws
+**/.classpath
+**/.gradle/
+**/.settings/
