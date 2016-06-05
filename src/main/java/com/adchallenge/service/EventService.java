@@ -23,8 +23,14 @@ public class EventService {
 	@Autowired
 	private UserAccountRepository userAccountRepository;
 
+	/**
+	 * 
+	 * @param eventUrl
+	 * @return
+	 * @throws Exception
+	 */
 	public EventNotificationResponse processEvent(String eventUrl) throws Exception {
-		EventProcessor eventProcessor = null;
+		EventProcessor eventProcessor;
 		Event eventDetails = adClient.getEventDetails(eventUrl);
 		switch (eventDetails.getType()) {
 		case SUBSCRIPTION_ORDER:
