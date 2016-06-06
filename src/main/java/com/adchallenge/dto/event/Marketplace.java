@@ -2,9 +2,9 @@ package com.adchallenge.dto.event;
 
 public class Marketplace {
 
-	String partner;
+	private String partner;
 
-	String baseUrl;
+	private String baseUrl;
 
 	public String getPartner() {
 		return partner;

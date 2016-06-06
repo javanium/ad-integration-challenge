@@ -6,74 +6,74 @@ import com.adchallenge.enums.Flag;
 
 public class Event {
 
-	private EventType type;
+  private EventType type;
 
-	private Marketplace marketplace;
+  private Marketplace marketplace;
 
-	private String applicationUuid;
+  private String applicationUuid;
 
-	private Flag flag;
+  private Flag flag;
 
-	private Creator creator;
+  private Creator creator;
 
-	private Payload payload;
+  private Payload payload;
 
-	private String returnUrl;
+  private String returnUrl;
 
-	public EventType getType() {
-		return type;
-	}
+  public EventType getType() {
+    return type;
+  }
 
-	public void setType(EventType type) {
-		this.type = type;
-	}
+  public void setType(EventType type) {
+    this.type = type;
+  }
 
-	public Marketplace getMarketplace() {
-		return marketplace;
-	}
+  public Marketplace getMarketplace() {
+    return marketplace;
+  }
 
-	public void setMarketplace(Marketplace marketplace) {
-		this.marketplace = marketplace;
-	}
+  public void setMarketplace(Marketplace marketplace) {
+    this.marketplace = marketplace;
+  }
 
-	public String getApplicationUuid() {
-		return applicationUuid;
-	}
+  public String getApplicationUuid() {
+    return applicationUuid;
+  }
 
-	public void setApplicationUuid(String applicationUuid) {
-		this.applicationUuid = applicationUuid;
-	}
+  public void setApplicationUuid(String applicationUuid) {
+    this.applicationUuid = applicationUuid;
+  }
 
-	public Flag getFlag() {
-		return flag;
-	}
+  public Flag getFlag() {
+    return flag;
+  }
 
-	public void setFlag(Flag flag) {
-		this.flag = flag;
-	}
+  public void setFlag(Flag flag) {
+    this.flag = flag;
+  }
 
-	public Creator getCreator() {
-		return creator;
-	}
+  public Creator getCreator() {
+    return creator;
+  }
 
-	public void setCreator(Creator creator) {
-		this.creator = creator;
-	}
+  public void setCreator(Creator creator) {
+    this.creator = creator;
+  }
 
-	public Payload getPayload() {
-		return payload;
-	}
+  public Payload getPayload() {
+    return payload;
+  }
 
-	public void setPayload(Payload payload) {
-		this.payload = payload;
-	}
+  public void setPayload(Payload payload) {
+    this.payload = payload;
+  }
 
-	public String getReturnUrl() {
-		return returnUrl;
-	}
+  public String getReturnUrl() {
+    return returnUrl;
+  }
 
-	public void setReturnUrl(String returnUrl) {
-		this.returnUrl = returnUrl;
-	}
+  public void setReturnUrl(String returnUrl) {
+    this.returnUrl = returnUrl;
+  }
 
 }

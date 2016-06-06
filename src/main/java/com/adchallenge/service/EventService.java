@@ -17,43 +17,47 @@ import com.adchallenge.service.eventprocessor.subscription.SubscriptionOrderEven
 @Service
 public class EventService {
 
-	@Autowired
-	private ADClient adClient;
+  private ADClient adClient;
 
-	@Autowired
-	private UserAccountRepository userAccountRepository;
+  private UserAccountRepository userAccountRepository;
 
-	/**
-	 * 
-	 * @param eventUrl
-	 * @return
-	 * @throws Exception
-	 */
-	public EventNotificationResponse processEvent(String eventUrl) throws Exception {
-		EventProcessor eventProcessor;
-		Event eventDetails = adClient.getEventDetails(eventUrl);
-		switch (eventDetails.getType()) {
-		case SUBSCRIPTION_ORDER:
-			eventProcessor = new SubscriptionOrderEventProcessor(userAccountRepository);
-			break;
-		case SUBSCRIPTION_CHANGE:
-			eventProcessor = new SubscriptionChangeEventProcessor(userAccountRepository);
-			break;
-		case SUBSCRIPTION_CANCEL:
-			eventProcessor = new SubscriptionCancelEventProcessor(userAccountRepository);
-			break;
-		case SUBSCRIPTION_NOTICE:
-		case USER_ASSIGNMENT:
-		case USER_UNASSIGNMENT:
-		case USER_UPDATED:
-			return new EventNotificationFailedResponse("API:" + eventDetails.getType() + " is valid but not integrated yet",
-			    EventNotificationErrorCode.BINDING_NOT_FOUND);
-		default:
-			return new EventNotificationFailedResponse("API:" + eventDetails.getType() + " is invalid",
-			    EventNotificationErrorCode.BINDING_NOT_FOUND);
-		}
+  @Autowired
+  public EventService(ADClient adClient, UserAccountRepository userAccountRepository) {
+    this.adClient = adClient;
+    this.userAccountRepository = userAccountRepository;
+  }
 
-		return eventProcessor.process(eventDetails);
-	}
+  /**
+   *
+   * @param eventUrl
+   * @return
+   * @throws Exception
+   */
+  public EventNotificationResponse processEvent(String eventUrl) {
+    EventProcessor eventProcessor;
+    Event eventDetails = adClient.getEventDetails(eventUrl);
+    switch (eventDetails.getType()) {
+    case SUBSCRIPTION_ORDER:
+      eventProcessor = new SubscriptionOrderEventProcessor(userAccountRepository);
+      break;
+    case SUBSCRIPTION_CHANGE:
+      eventProcessor = new SubscriptionChangeEventProcessor(userAccountRepository);
+      break;
+    case SUBSCRIPTION_CANCEL:
+      eventProcessor = new SubscriptionCancelEventProcessor(userAccountRepository);
+      break;
+    case SUBSCRIPTION_NOTICE:
+    case USER_ASSIGNMENT:
+    case USER_UNASSIGNMENT:
+    case USER_UPDATED:
+      return new EventNotificationFailedResponse("API:" + eventDetails.getType() + " is valid but not integrated yet",
+          EventNotificationErrorCode.BINDING_NOT_FOUND);
+    default:
+      return new EventNotificationFailedResponse("API:" + eventDetails.getType() + " is invalid",
+          EventNotificationErrorCode.BINDING_NOT_FOUND);
+    }
+
+    return eventProcessor.process(eventDetails);
+  }
 
 }
