@@ -14,17 +14,17 @@ import com.adchallenge.service.EventService;
 @RestController
 public class SubscriptionNotificationController {
 
-  private static Logger LOGGER = Logger.getLogger(SubscriptionNotificationController.class);
+	private static Logger LOGGER = Logger.getLogger(SubscriptionNotificationController.class);
 
-  @Autowired
-  private EventService eventService;
+	@Autowired
+	private EventService eventService;
 
-  @RequestMapping(value = "/subscription_notifications", method = RequestMethod.GET)
-  public EventNotificationResponse subscriptionEventProcessor(@RequestParam String eventUrl,
-      @RequestHeader(required = false) String authorization) throws Exception {
-    LOGGER.info(eventUrl);
-    LOGGER.info(authorization);
-    return eventService.processEvent(eventUrl);
-  }
+	@RequestMapping(value = "/subscription_notifications", method = RequestMethod.GET)
+	public EventNotificationResponse subscriptionEventProcessor(@RequestParam String eventUrl,
+	    @RequestHeader String authorization) throws Exception {
+		LOGGER.info(eventUrl);
+		LOGGER.info(authorization);
+		return eventService.processEvent(eventUrl);
+	}
 
 }
