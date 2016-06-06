@@ -18,6 +18,10 @@ import com.adchallenge.enums.EventType;
 import com.adchallenge.service.dataprovider.EventNotificationDataProvider;
 import com.adchallenge.service.dataprovider.UserAccountDataProvider;
 
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+
 public class EventServiceTest {
 
   @Mock
@@ -35,7 +39,8 @@ public class EventServiceTest {
   }
 
   @Test
-  public void processEvent_EventTypeSubscriptionOrder_CorrectProcessing() {
+  public void processEvent_EventTypeSubscriptionOrder_CorrectProcessing()
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     String eventUrl = "dummyOrder";
     EventNotificationResponse expectedEventNotificationResponse = new EventNotificationSuccessResponse("dummy-account",
         "Subscription created successfully");
@@ -51,7 +56,8 @@ public class EventServiceTest {
   }
 
   @Test
-  public void processEvent_EventTypeSubscriptionOrderUserAlreadyExists_CorrectProcessing() {
+  public void processEvent_EventTypeSubscriptionOrderUserAlreadyExists_CorrectProcessing()
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     String eventUrl = "dummyOrder";
     EventNotificationResponse expectedEventNotificationResponse = new EventNotificationFailedResponse(
         "Subscription creation failed", EventNotificationErrorCode.USER_ALREADY_EXISTS);
@@ -65,7 +71,8 @@ public class EventServiceTest {
   }
 
   @Test
-  public void processEvent_EventTypeSubscriptionChangeAndUserFound_CorrectProcessing() {
+  public void processEvent_EventTypeSubscriptionChangeAndUserFound_CorrectProcessing()
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     String eventUrl = "dummyChange";
     EventNotificationResponse expectedEventNotificationResponse = new EventNotificationSuccessResponse("dummy-account",
         "Subscription updated successfully");
@@ -79,7 +86,8 @@ public class EventServiceTest {
   }
 
   @Test
-  public void processEvent_EventTypeSubscriptionChangeAndUserNotFound_CorrectProcessing() {
+  public void processEvent_EventTypeSubscriptionChangeAndUserNotFound_CorrectProcessing()
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     String eventUrl = "dummyChange";
     EventNotificationResponse expectedEventNotificationResponse = new EventNotificationFailedResponse(
         "Subscription update failed", EventNotificationErrorCode.ACCOUNT_NOT_FOUND);
@@ -93,7 +101,8 @@ public class EventServiceTest {
   }
 
   @Test
-  public void processEvent_EventTypeSubscriptionCancelAndUserFound_CorrectProcessing() {
+  public void processEvent_EventTypeSubscriptionCancelAndUserFound_CorrectProcessing()
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     String eventUrl = "dummyCancel";
     EventNotificationResponse expectedEventNotificationResponse = new EventNotificationSuccessResponse("dummy-account",
         "Subscription cancelled");
@@ -107,7 +116,8 @@ public class EventServiceTest {
   }
 
   @Test
-  public void processEvent_EventTypeSubscriptionCancelAndUserNotFound_CorrectProcessing() {
+  public void processEvent_EventTypeSubscriptionCancelAndUserNotFound_CorrectProcessing()
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     String eventUrl = "dummyCancel";
     EventNotificationResponse expectedEventNotificationResponse = new EventNotificationFailedResponse("Cancel failed",
         EventNotificationErrorCode.ACCOUNT_NOT_FOUND);
@@ -121,7 +131,8 @@ public class EventServiceTest {
   }
 
   @Test
-  public void processEvent_EventTypeNotIntegrated_CorrectProcessing() {
+  public void processEvent_EventTypeNotIntegrated_CorrectProcessing()
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     String eventUrl = "dummyNotice";
     EventNotificationResponse expectedEventNotificationResponse = new EventNotificationFailedResponse(
         "API:SUBSCRIPTION_NOTICE is valid but not integrated yet", EventNotificationErrorCode.BINDING_NOT_FOUND);
@@ -133,10 +144,11 @@ public class EventServiceTest {
   }
 
   @Test
-  public void processEvent_EventTypeUnknown_CorrectProcessing() {
+  public void processEvent_EventTypeUnknown_CorrectProcessing()
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     String eventUrl = "dummyUnknown";
-    EventNotificationResponse expectedEventNotificationResponse = new EventNotificationFailedResponse("API:UNKNOWN is invalid",
-        EventNotificationErrorCode.BINDING_NOT_FOUND);
+    EventNotificationResponse expectedEventNotificationResponse = new EventNotificationFailedResponse(
+        "API:UNKNOWN is invalid", EventNotificationErrorCode.BINDING_NOT_FOUND);
     Mockito.doReturn(EventNotificationDataProvider.getEventNotification(EventType.UNKNOWN, "dummy-account"))
         .when(adClient).getEventDetails(eventUrl);
     EventNotificationResponse actualEventNotificationResponse = eventService.processEvent(eventUrl);

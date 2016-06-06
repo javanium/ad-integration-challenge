@@ -14,6 +14,10 @@ import com.adchallenge.service.eventprocessor.subscription.SubscriptionCancelEve
 import com.adchallenge.service.eventprocessor.subscription.SubscriptionChangeEventProcessor;
 import com.adchallenge.service.eventprocessor.subscription.SubscriptionOrderEventProcessor;
 
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+
 @Service
 public class EventService {
 
@@ -31,33 +35,44 @@ public class EventService {
    *
    * @param eventUrl
    * @return
+   * @throws OAuthCommunicationException
+   * @throws OAuthExpectationFailedException
+   * @throws OAuthMessageSignerException
    * @throws Exception
    */
-  public EventNotificationResponse processEvent(String eventUrl) {
+  public EventNotificationResponse processEvent(String eventUrl)
+      throws OAuthMessageSignerException, OAuthExpectationFailedException, OAuthCommunicationException {
     EventProcessor eventProcessor;
+    EventNotificationResponse eventNotificationResponse;
     Event eventDetails = adClient.getEventDetails(eventUrl);
+
     switch (eventDetails.getType()) {
     case SUBSCRIPTION_ORDER:
       eventProcessor = new SubscriptionOrderEventProcessor(userAccountRepository);
+      eventNotificationResponse = eventProcessor.process(eventDetails);
       break;
     case SUBSCRIPTION_CHANGE:
       eventProcessor = new SubscriptionChangeEventProcessor(userAccountRepository);
+      eventNotificationResponse = eventProcessor.process(eventDetails);
       break;
     case SUBSCRIPTION_CANCEL:
       eventProcessor = new SubscriptionCancelEventProcessor(userAccountRepository);
+      eventNotificationResponse = eventProcessor.process(eventDetails);
       break;
     case SUBSCRIPTION_NOTICE:
     case USER_ASSIGNMENT:
     case USER_UNASSIGNMENT:
     case USER_UPDATED:
-      return new EventNotificationFailedResponse("API:" + eventDetails.getType() + " is valid but not integrated yet",
+      eventNotificationResponse = new EventNotificationFailedResponse(
+          "API:" + eventDetails.getType() + " is valid but not integrated yet",
           EventNotificationErrorCode.BINDING_NOT_FOUND);
+      break;
     default:
-      return new EventNotificationFailedResponse("API:" + eventDetails.getType() + " is invalid",
+      eventNotificationResponse = new EventNotificationFailedResponse("API:" + eventDetails.getType() + " is invalid",
           EventNotificationErrorCode.BINDING_NOT_FOUND);
+      break;
     }
-
-    return eventProcessor.process(eventDetails);
+    return eventNotificationResponse;
   }
 
 }
