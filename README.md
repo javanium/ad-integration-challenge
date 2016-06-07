@@ -22,6 +22,11 @@ Event notifications API is unified in one end point :
 - User Unassignment
 - User Updated  
 
+## How to run  
+Very easy, clone the repo and do `gradle bootRun` at the root of the repo folder  
+The app will be launched on port 8080 and the API as follow:  
+`localhost:8080/api/v1/notifications?eventUrl={eventUrl}`
+
 ## Technologies used
 - Gradle
 - Java 8
