@@ -15,7 +15,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests().antMatchers("/notification_subscription").authenticated().anyRequest().permitAll();
+    http.csrf().disable().authorizeRequests().antMatchers("/notification_subscription").authenticated().anyRequest()
+        .permitAll();
     http.addFilterAfter(appDirectProcessingFilter, BasicAuthenticationFilter.class);
   }
 }
