@@ -6,9 +6,15 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.adchallenge.domain.entities.UserAccount;
 
+/**
+ *
+ *
+ */
 @RepositoryRestResource
 public interface UserAccountRepository extends MongoRepository<UserAccount, String> {
 
-	UserAccount findByUuid(@Param("uuid") String uuid);
+  UserAccount findByUuid(@Param("uuid") String uuid);
+
+  UserAccount findByOpenId(@Param("openId") String openId);
 
 }

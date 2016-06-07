@@ -4,60 +4,59 @@ import com.adchallenge.dto.event.payload.order.Order;
 
 public class Payload {
 
-	// private User user;
+  private Company company;
 
-	private Company company;
+  private Account account;
 
-	private Account account;
+  // TODO: Handle the following fields
+  // private User user;
+  // private AddonInstance addonInstance;
+  // private AddonBinding addonBinding;
 
-	// private AddonInstance addonInstance;
+  private Order order;
 
-	// private AddonBinding addonBinding;
+  private Notice notice;
 
-	private Order order;
+  private Configuration configuration;
 
-	private Notice notice;
+  public Company getCompany() {
+    return company;
+  }
 
-	private Configuration configuration;
+  public void setCompany(Company company) {
+    this.company = company;
+  }
 
-	public Company getCompany() {
-		return company;
-	}
+  public Account getAccount() {
+    return account;
+  }
 
-	public void setCompany(Company company) {
-		this.company = company;
-	}
+  public void setAccount(Account account) {
+    this.account = account;
+  }
 
-	public Account getAccount() {
-		return account;
-	}
+  public Order getOrder() {
+    return order;
+  }
 
-	public void setAccount(Account account) {
-		this.account = account;
-	}
+  public void setOrder(Order order) {
+    this.order = order;
+  }
 
-	public Order getOrder() {
-		return order;
-	}
+  public Notice getNotice() {
+    return notice;
+  }
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
+  public void setNotice(Notice notice) {
+    this.notice = notice;
+  }
 
-	public Notice getNotice() {
-		return notice;
-	}
+  public Configuration getConfiguration() {
+    return configuration;
+  }
 
-	public void setNotice(Notice notice) {
-		this.notice = notice;
-	}
-
-	public Configuration getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(Configuration configuration) {
-		this.configuration = configuration;
-	}
+  public void setConfiguration(Configuration configuration) {
+    this.configuration = configuration;
+  }
 
 }

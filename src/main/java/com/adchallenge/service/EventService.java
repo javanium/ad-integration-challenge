@@ -3,7 +3,7 @@ package com.adchallenge.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.adchallenge.clients.ADClient;
+import com.adchallenge.clients.AppDirectClient;
 import com.adchallenge.domain.repository.UserAccountRepository;
 import com.adchallenge.dto.EventNotificationFailedResponse;
 import com.adchallenge.dto.EventNotificationResponse;
@@ -17,21 +17,21 @@ import com.adchallenge.service.eventprocessor.subscription.SubscriptionOrderEven
 @Service
 public class EventService {
 
-  private ADClient adClient;
+  private AppDirectClient adClient;
 
   private UserAccountRepository userAccountRepository;
 
   @Autowired
-  public EventService(ADClient adClient, UserAccountRepository userAccountRepository) {
+  public EventService(AppDirectClient adClient, UserAccountRepository userAccountRepository) {
     this.adClient = adClient;
     this.userAccountRepository = userAccountRepository;
   }
 
   /**
+   * Process the event according to the event type
    *
    * @param eventUrl
-   * @return
-   * @throws Exception
+   * @return EventNotificationResponse
    */
   public EventNotificationResponse processEvent(String eventUrl) {
     EventProcessor eventProcessor;

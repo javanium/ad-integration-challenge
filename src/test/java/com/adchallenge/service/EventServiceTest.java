@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.adchallenge.clients.ADClient;
+import com.adchallenge.clients.AppDirectClient;
 import com.adchallenge.domain.entities.UserAccount;
 import com.adchallenge.domain.repository.UserAccountRepository;
 import com.adchallenge.dto.EventNotificationFailedResponse;
@@ -21,7 +21,7 @@ import com.adchallenge.service.dataprovider.UserAccountDataProvider;
 public class EventServiceTest {
 
   @Mock
-  private ADClient adClient;
+  private AppDirectClient adClient;
 
   @Mock
   private UserAccountRepository userAccountRepository;

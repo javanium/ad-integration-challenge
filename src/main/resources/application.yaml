@@ -1,3 +1,7 @@
+oauth:
+  consumerKey: appdirectchallenge-119023
+  consumerSecret: CQXJAvpJVMQLVHoL
+
 spring:
   data:
     mongodb:
