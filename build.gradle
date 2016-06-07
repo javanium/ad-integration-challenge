@@ -30,19 +30,19 @@ task stage {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-    compile('org.springframework.boot:spring-boot-starter-web')
+  compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+  compile('org.springframework.boot:spring-boot-starter-web')
   compile('org.springframework.boot:spring-boot-starter-actuator')
   compile('org.springframework.data:spring-data-rest-hal-browser')
   compile('org.springframework.boot:spring-boot-starter-data-rest')
   compile('com.sun.jersey.contribs.jersey-oauth:oauth-signature:1.19.1')
   compile('org.springframework.security.oauth:spring-security-oauth')
-    compile('org.springframework.boot:spring-boot-starter-jdbc')
-    compile('org.springframework.security:spring-security-openid')
+  compile('org.springframework.boot:spring-boot-starter-jdbc')
+  compile('org.springframework.security:spring-security-openid')
 
   compile('oauth.signpost:signpost-core:1.2.1.2')
-    compile('oauth.signpost:signpost-commonshttp4:1.2.1.2')
-    compile('com.h2database:h2')
+  compile('oauth.signpost:signpost-commonshttp4:1.2.1.2')
+  compile('com.h2database:h2')
   testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
