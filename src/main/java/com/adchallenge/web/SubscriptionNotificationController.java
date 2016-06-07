@@ -13,6 +13,8 @@ import com.adchallenge.service.EventService;
 @RestController
 public class SubscriptionNotificationController {
 
+  public static final String INTEGRATION_PATH = "/api/v1/notifications";
+
   private static Logger LOGGER = Logger.getLogger(SubscriptionNotificationController.class);
 
   @Autowired
@@ -24,7 +26,7 @@ public class SubscriptionNotificationController {
    * @param eventUrl
    * @return
    */
-  @RequestMapping(value = "/subscription_notifications", method = RequestMethod.GET)
+  @RequestMapping(value = SubscriptionNotificationController.INTEGRATION_PATH, method = RequestMethod.GET)
   public EventNotificationResponse subscriptionEventProcessor(@RequestParam String eventUrl) {
     LOGGER.info(eventUrl);
     return eventService.processEvent(eventUrl);

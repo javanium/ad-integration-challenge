@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.oauth.provider.filter.OAuthProviderProcessingFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.adchallenge.web.SubscriptionNotificationController;
+
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -15,7 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable().authorizeRequests().antMatchers("/notification_subscription").authenticated().anyRequest()
+    http.csrf().disable().authorizeRequests().antMatchers(SubscriptionNotificationController.INTEGRATION_PATH).authenticated().anyRequest()
         .permitAll();
     http.addFilterAfter(appDirectProcessingFilter, BasicAuthenticationFilter.class);
   }

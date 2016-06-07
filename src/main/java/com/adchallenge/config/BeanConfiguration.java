@@ -18,6 +18,7 @@ import org.springframework.security.oauth.provider.token.InMemorySelfCleaningPro
 import org.springframework.security.oauth.provider.token.OAuthProviderTokenServices;
 
 import com.adchallenge.security.CustomResourceProcessingFilter;
+import com.adchallenge.web.SubscriptionNotificationController;
 
 @Configuration
 @ComponentScan
@@ -40,7 +41,7 @@ public class BeanConfiguration extends BaseProtectedResourceDetails {
   @Bean
   OAuthProviderProcessingFilter appDirectProcessingFilter() {
     CustomResourceProcessingFilter filter = new CustomResourceProcessingFilter();
-    filter.setFilterProcessesUrl("/subscription_notifications");
+    filter.setFilterProcessesUrl(SubscriptionNotificationController.INTEGRATION_PATH);
     filter.setTokenServices(providerTokenServices());
     filter.setConsumerDetailsService(consumerDetailsService());
     return filter;
