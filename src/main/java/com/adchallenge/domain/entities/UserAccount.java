@@ -1,5 +1,7 @@
 package com.adchallenge.domain.entities;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.springframework.data.annotation.Id;
 
 import com.adchallenge.dto.event.Creator;
@@ -40,10 +42,8 @@ public class UserAccount {
 
   public UserAccount(Creator creator, Order order) {
     super();
-    // this.accountIdentifier = creator.getFirstName() + "-" +
-    // creator.getLastName()
-    // + ThreadLocalRandom.current().nextInt(0, 100 + 1);
-    this.accountIdentifier = "dummy-account";
+    this.accountIdentifier = creator.getFirstName() + "-" + creator.getLastName()
+        + ThreadLocalRandom.current().nextInt(0, 100 + 1);
     this.uuid = creator.getUuid();
     this.openId = creator.getOpenId();
     this.email = creator.getEmail();
